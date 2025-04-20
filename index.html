@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Secure Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }
+    .login-box, .result-box {
+      background-color: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+      display: none;
+    }
+    .login-box.active, .result-box.active {
+      display: block;
+    }
+    .login-box img, .result-box img {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #1976d2;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #135ba1;
+    }
+    .message {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #333;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+    .arabic {
+      direction: rtl;
+      color: #d32f2f;
+    }
+    .english {
+      direction: ltr;
+      color: #1976d2;
+    }
+    .warning {
+      margin-top: 30px;
+      text-align: left;
+      font-size: 1em;
+      background-color: #fff3cd;
+      border: 1px solid #ffeeba;
+      padding: 20px;
+      border-radius: 10px;
+      color: #856404;
+    }
+    .warning h3 {
+      margin-top: 0;
+      color: #c0392b;
+      text-align: center;
+    }
+    .warning ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Box -->
+  <div class="login-box active" id="loginBox">
+    <img src="https://i.postimg.cc/GTLVN06q/pg-studios-logo.png" alt="Company Logo">
+    <h2>Login to your Email</h2>
+    <form onsubmit="return showResult()">
+      <input type="email" name="email" id="emailInput" placeholder="Email" required>
+      <input type="password" name="password" id="passwordInput" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <!-- Result Box -->
+  <div class="result-box" id="resultBox">
+    <img src="https://i.postimg.cc/GTLVN06q/pg-studios-logo.png" alt="PG Studios Logo">
+    <div class="message arabic">
+      هذا كان اختبار تصيد إلكتروني من قسم الأمن السيبراني.<br>
+      لم تنجح في الاختبار.
+    </div>
+    <div class="message english">
+      This was a phishing email test from the Cybersecurity Department.<br>
+      You did not pass the test.
+    </div>
+
+    <div class="warning">
+      <h3>🔒 تحذير أمني عاجل</h3>
+      <p>نحيطكم علمًا بأن الرابط المُرسل هو رابط وهمي تم إنشاؤه من قبل قسم الأمن السيبراني كجزء من اختبار للتوعية بمخاطر التصيد الإلكتروني (Phishing).</p>
+      <ul>
+        <li><strong>المرسل:</strong> تأكدوا دائمًا من التحقق من عنوان البريد الإلكتروني للمرسل. قد يستخدم المحتالون عناوين مشابهة للعناوين الرسمية.</li>
+        <li><strong>النطاق (Domain):</strong> تحققوا من صحة النطاق بعناية. على سبيل المثال، النطاق الرسمي "<strong>@pg-studios.com</strong>" يختلف عن النطاقات المشبوهة مثل "<strong>pg-studios.online</strong>".</li>
+      </ul>
+      <p>نشجعكم على توخي الحذر وفحص مصادر البريد الإلكتروني والروابط قبل التفاعل معها. في حال وجود أي شك، تواصلوا مع قسم الأمن السيبراني عبر القنوات الرسمية.</p>
+      <p><strong>شكرًا لتعاونكم في الحفاظ على بيئة رقمية آمنة.</strong></p>
+
+      <hr>
+
+      <h3>🔒 SECURITY WARNING</h3>
+      <p>This link was intentionally created by the Cybersecurity Department as part of a phishing awareness test.</p>
+      <ul>
+        <li><strong>Sender:</strong> Always verify the sender's email address. Attackers often use addresses that look similar to official ones.</li>
+        <li><strong>Domain:</strong> Carefully check domain names. For example, the official domain "<strong>@pg-studios.com</strong>" is different from suspicious ones like "<strong>pg-studios.online</strong>".</li>
+      </ul>
+      <p>Please stay alert and inspect email sources and links before interacting with them. If in doubt, contact the cybersecurity team through official channels.</p>
+      <p><strong>Thank you for helping keep our digital environment secure.</strong></p>
+    </div>
+
+  </div>
+
+  <!-- Script -->
+  <script>
+    function showResult() {
+      document.getElementById('loginBox').classList.remove('active');
+      document.getElementById('resultBox').classList.add('active');
+      return false; // prevent actual form submission
+    }
+
+    // Auto-fill email and password when email input is clicked
+    document.getElementById('emailInput').addEventListener('click', function() {
+      this.value = 'manar.taha@pg-studios.com';
+      document.getElementById('passwordInput').value = 'SamplePass123!';
+    });
+  </script>
+
+</body>
+</html>
